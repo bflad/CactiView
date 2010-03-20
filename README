@@ -2,7 +2,7 @@
 #########################################################################
 #
 #       CactiView v1.0 - Brian Flad
-#       http://fladpad.com
+#       http://fladpad.com - bflad417@gmail.com
 #       
 #       Forked from the excellent:
 #       CactiView v0.1 - Laurie Denness
