@@ -1,35 +1,34 @@
 
 #########################################################################
-#									#
-#       CactiView v0.1 - Laurie Denness					#
-#       http://laurie.denness.net - laurie@denness.net			#
-#									#
-#       Displays a section of Cacti graphs based on your selection.	#
-#       Graphs rotate automatically every 20 seconds (by default)	#
-#									#
-#       Configuration is available in config.php			#
-#									#
+#
+#       CactiView v1.0 - Brian Flad
+#       http://fladpad.com
+#       
+#       Forked from the excellent:
+#       CactiView v0.1 - Laurie Denness
+#       http://laurie.denness.net - laurie@denness.net
+#
+#       Displays a section of Cacti graphs based on your selection.
+#       Graphs rotate automatically rotate with AJAX
+#
+#       Configuration is available in config.php
+#
 #########################################################################
-
 
 DISCLAIMER: I am not a PHP developer. I am a sysadmin. This code is probably not 100% glamorous, 
 but it works. If you have any problems, I'm sure they won't be hard to solve; and I cannot be
 held responsible if you lose data, time, your girlfriend, your house, or anything else from 
 using this code. 
 
-
 0. Requirements
 
 - PHP
 - Cacti
-- A monitor dedicated for graphs, preferably hanging from the ceiling or wall. 
-- A web browser running on a computer attached to said monitor
+- A decent web browser with Javascript/AJAX support
 
 1. Limitations
 
-At the present time, this is intended for a specific screen resolution and there is no easy
-way to change this dynamically. If it doesn't quite fit, please manually alter the size of the
-graphs using the numbers in graphview.php. 
+Flat config file must be edited to change rotation items/speed. 
 
 2. What it does 
 
@@ -38,7 +37,7 @@ name the data sources, and set the automatic rotation duration.
 
 You can see how this looks here: http://www.flickr.com/photos/lozzd/3210562508/
 
-One main large graph for the last 12 hours, 3 smaller graphs with longer time periods and a 
+One main large graph for the last 24 hours, 3 smaller graphs with longer time periods and a 
 couple of other bits and bobs of information. 
 
 3. Configuration
@@ -72,6 +71,8 @@ dpms to sleep and wake the monitors using cron.
 
 6. Modifying Cacti
 
+(Currently not implemented!)
+
 To remove the graph title from the CactiView graphs to make the display cleaner, you need 
 to add a small amount of code to Cacti itself. This is optional, but recommended. 
 
@@ -95,4 +96,4 @@ to add a small amount of code to Cacti itself. This is optional, but recommended
 
 7. Help me!
 
-No! Well maybe. Send me an email, and I can probably offer some advice. I apologise if not!
+No! Well maybe. Send me an email, and I can probably offer some advice. I apologize if not!
