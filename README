@@ -33,9 +33,14 @@ Flat config file must be edited to change rotation items/speed.
 2. What it does 
 
 CactiView gives you a clean and simple view of one data source from Cacti at a time. You can
-name the data sources, and set the automatic rotation duration. 
+name the data sources, and set the automatic rotation duration.
 
-You can see how this looks here: http://www.flickr.com/photos/lozzd/3210562508/
+When you first load CactiView, it will automatically determine the size of your browser
+and size everything (hopefully) appropriately. If you need to force a resize, just remove
+the height and width parameters from the URL.
+
+You can see how this looks here: http://www.flickr.com/photos/hiddenspark42/4447965060/
+Original v0.1 by Laurie: http://www.flickr.com/photos/lozzd/3210562508/
 
 One main large graph for the last 24 hours, 3 smaller graphs with longer time periods and a 
 couple of other bits and bobs of information. 
