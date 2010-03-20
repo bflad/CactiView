@@ -1,11 +1,15 @@
 <?
 #########################################################################
 #
+#       CactiView v1.0 - Brian Flad
+#       http://fladpad.com
+#       
+#       Forked from the excellent:
 #       CactiView v0.1 - Laurie Denness
 #       http://laurie.denness.net - laurie@denness.net
 #
 #       Displays a section of Cacti graphs based on your selection.
-#       Graphs rotate automatically every 20 seconds (by default)
+#       Graphs rotate automatically rotate with AJAX
 #
 #       Configuration is available in config.php
 #
@@ -14,11 +18,10 @@
 ## CactiView configuration
 
 # Time (in milliseconds) before the graphs will rotate automatically.
-$timeout = 20000;
+$timeout = 15000;
 
 # Path to cacti (on your webserver, including the trailing slash) e.g. http://cactihost/cacti/
-$cactipath = "http://host/cacti/";
-
+$cactipath = "http://cactihost/cacti/";
 
 # Graph definitions
 #
@@ -29,10 +32,9 @@ $cactipath = "http://host/cacti/";
 # You can define as many graphs as you wish. 
 
 $graphs = array (
-array("cactiid" => 1 , "title" => "Graph 1" ),
-array("cactiid" => 2 , "title" => "Graph 2" ),
+array("cactiid" => 12 , "title" => "Title 1" ),
+array("cactiid" => 23 , "title" => "Title 2" ),
 );
-
 
 # Disable debugging
 error_reporting(0);
