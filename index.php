@@ -2,15 +2,14 @@
 
 #########################################################################
 #
-#       CactiView v1.0 - Brian Flad
+#       CactiView v1.1 - Brian Flad
 #       http://fladpad.com - bflad417@gmail.com
 #       
-#       Forked from the excellent:
-#       CactiView v0.1 - Laurie Denness
+#       Forked and updated from the excellent:
+#       CactiView v0.2 - Laurie Denness
 #       http://laurie.denness.net - laurie@denness.net
 #
-#       Displays a section of Cacti graphs based on your selection.
-#       Graphs rotate automatically rotate with AJAX
+#       Displays a rotation selection of graphs from Cacti/Ganglia
 #
 #       Configuration is available in config.php
 #
@@ -70,10 +69,24 @@ $next_title_font_size = floor($current_title_font_size * 0.50);
 			var graphs = new Array();
 			<? foreach ($graphs as $index=>$graph) { ?>
 				graphs[<?= $index ?>] = new Array();
-				graphs[<?= $index ?>]['cactiid'] = "<?= $graph['cactiid'] ?>";
+				graphs[<?= $index ?>]['source'] = "<?= $graph['source'] ?>";
+				<? switch ($graph['source']) { 
+					case "cacti": ?>
+						graphs[<?= $index ?>]['cactiid'] = "<?= $graph['cactiid'] ?>";
+						<? break;
+					case "ganglia": ?>
+						graphs[<?= $index ?>]['cluster'] = "<?= $graph['cluster'] ?>";
+						graphs[<?= $index ?>]['graph_type'] = "<?= $graph['graph_type'] ?>";
+						<? if (isset($graph['host'])) { ?>
+							graphs[<?= $index ?>]['cluster'] += "&h=<?= $graph['host'] ?>";
+						<? }
+						break;
+				} ?>
 				graphs[<?= $index ?>]['title'] = "<?= $graph['title'] ?>";
 			<? } ?>
-			var url = "<?= $cactipath ?>graph_image.php?";
+			var url = new Array();
+			url['cacti'] = "<?= $cactipath ?>graph_image.php?";
+			url['ganglia'] = "<?= $gangliapath ?>graph.php?";
 			var left_graph_height = <?= ($left_graph_div_height - 70) ?>;
 			var left_graph_width = <?= ($left_graph_div_width - 105) ?>;
 			var right_graph_height = <?= ($right_graph_div_height - 70) ?>;
@@ -118,30 +131,80 @@ $next_title_font_size = floor($current_title_font_size * 0.50);
 				return false;
 			}
 			function urlLeft(current_index) {
-				return url+
-					'action=view'+
-					'&local_graph_id='+graphs[current_index]['cactiid']+
-					'&rra_id=0'+
-					'&graph_height='+left_graph_height+
-					'&graph_width='+left_graph_width+
-					'&graph_nolegend=1';
+				switch (graphs[current_index]['source']) {
+					case "cacti":
+						return url['cacti']+
+							'action=view'+
+							'&local_graph_id='+graphs[current_index]['cactiid']+
+							'&rra_id=0'+
+							'&graph_height='+left_graph_height+
+							'&graph_width='+left_graph_width+
+							'&graph_nolegend=1';
+					case "ganglia":
+						return url['ganglia']+
+							's=descending'+
+							'&m=load_one'+
+							'&r=day'+
+							'&c='+graphs[current_index]['cluster']+
+							'&g='+graphs[current_index]['graph_type']+
+							'&height='+left_graph_height+
+							'&width='+left_graph_width+
+							'&hc=4'+
+							'&mc=2'+
+							'&nolegend=1';
+					default:
+						alert('Graph source not defined!');
+						return '';
+				}
 			}
 			function urlRight(current_index) {
-				return url+
-					'action=view'+
-					'&local_graph_id='+graphs[current_index]['cactiid']+
-					'&graph_height='+right_graph_height+
-					'&graph_width='+right_graph_width+
-					'&graph_nolegend=1';
+				switch (graphs[current_index]['source']) {
+					case "cacti":
+						return url['cacti']+
+							'action=view'+
+							'&local_graph_id='+graphs[current_index]['cactiid']+
+							'&graph_height='+right_graph_height+
+							'&graph_width='+right_graph_width+
+							'&graph_nolegend=1';
+					case "ganglia":
+						return url['ganglia']+
+							's=descending'+
+							'&m=load_one'+
+							'&c='+graphs[current_index]['cluster']+
+							'&g='+graphs[current_index]['graph_type']+
+							'&height='+right_graph_height+
+							'&width='+right_graph_width+
+							'&hc=4'+
+							'&mc=2'+
+							'&nolegend=1';
+					default:
+						alert('Graph source not defined!');
+						return '';
+				}
 			}
 			function urlRightTop(current_index) {
-				return urlRight(current_index)+'&rra_id=2';
+				switch (graphs[current_index]['source']) {
+					case "cacti":
+						return urlRight(current_index)+'&rra_id=2';
+					case "ganglia":
+						return urlRight(current_index)+'&r=week';
+				}
 			}
 			function urlRightMiddle(current_index) {
-				return urlRight(current_index)+'&rra_id=3';
+				switch (graphs[current_index]['source']) {
+					case "cacti":
+						return urlRight(current_index)+'&rra_id=3';
+					case "ganglia":
+						return urlRight(current_index)+'&r=month';
+				}
 			}
 			function urlRightBottom(current_index) {
-				return urlRight(current_index)+'&rra_id=4';
+				switch (graphs[current_index]['source']) {
+					case "cacti":
+						return urlRight(current_index)+'&rra_id=4';
+					case "ganglia":
+						return urlRight(current_index)+'&r=year';
+				}
 			}
 			function loadLeftGraph(current_index) {
 				var img = new Image();

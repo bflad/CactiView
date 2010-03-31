@@ -1,15 +1,14 @@
 <?
 #########################################################################
 #
-#       CactiView v1.0 - Brian Flad
+#       CactiView v1.1 - Brian Flad
 #       http://fladpad.com - bflad417@gmail.com
 #       
-#       Forked from the excellent:
-#       CactiView v0.1 - Laurie Denness
+#       Forked and updated from the excellent:
+#       CactiView v0.2 - Laurie Denness
 #       http://laurie.denness.net - laurie@denness.net
 #
-#       Displays a section of Cacti graphs based on your selection.
-#       Graphs rotate automatically rotate with AJAX
+#       Displays a rotation selection of graphs from Cacti/Ganglia
 #
 #       Configuration is available in config.php
 #
@@ -23,17 +22,27 @@ $timeout = 15000;
 # Path to cacti (on your webserver, including the trailing slash) e.g. http://cactihost/cacti/
 $cactipath = "http://cactihost/cacti/";
 
+# Path to ganglia (on your webserver, including the trailing slash) e.g. http://gangliahost/cacti/
+$gangliapath = "http://gangliahost/ganglia/";
+
 # Graph definitions
 #
-# Alter the lines below to take the graphs you wish to rotate. 
-# For example, if the Cacti URL http://host/cacti/graph.php?action=view&local_graph_id=558&rra_id=all
-# then your "cactiid" is 558. Then enter a title of your choosing to be display on the graph. 
+# Alter the lines below to take the graphs you wish to rotate. You can define as many graphs as you wish.
 #
-# You can define as many graphs as you wish. 
+# Cacti
+# Specific graph information 
+# array("source" => "cacti", "cactiid" => 558, "title" => "Graph Title")
+# 
+# Ganglia
+# Cluster information
+# array("source" => "ganglia", "cluster" => "Web Servers", "graph_type" => "load_report", "title" => "Web Servers Title")
+# Host information (use FQDN, if applicable)
+# array("source" => "ganglia", "cluster" => "Web Servers", "graph_type" => "cpu_report", "host" => "www1.example.com", "title" => "Web Servers Title")
 
 $graphs = array (
-array("cactiid" => 12 , "title" => "Title 1" ),
-array("cactiid" => 23 , "title" => "Title 2" ),
+array("source" => "ganglia", "cluster" => "Web Servers", "graph_type" => "load_report", "title" => "Graph 1" ),
+array("source" => "ganglia", "cluster" => "Web Servers", "graph_type" => "cpu_report", "host" => "www1.example.com" , "title" => "Graph 2" ),
+array("source" => "cacti", "cactiid" => "558" , "title" => "Graph 3" ),
 );
 
 # Disable debugging

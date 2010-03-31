@@ -1,15 +1,14 @@
 
 #########################################################################
 #
-#       CactiView v1.0 - Brian Flad
+#       CactiView v1.1 - Brian Flad
 #       http://fladpad.com - bflad417@gmail.com
 #       
-#       Forked from the excellent:
-#       CactiView v0.1 - Laurie Denness
+#       Forked and updated from the excellent:
+#       CactiView v0.2 - Laurie Denness
 #       http://laurie.denness.net - laurie@denness.net
 #
-#       Displays a section of Cacti graphs based on your selection.
-#       Graphs rotate automatically rotate with AJAX
+#       Displays a rotation selection of graphs from Cacti/Ganglia
 #
 #       Configuration is available in config.php
 #
@@ -23,7 +22,7 @@ using this code.
 0. Requirements
 
 - PHP
-- Cacti
+- Cacti/Ganglia
 - A decent web browser with Javascript/AJAX support
 
 1. Limitations
@@ -47,7 +46,7 @@ couple of other bits and bobs of information.
 
 3. Configuration
 
-To get the most of CactiView, you should make a couple of simple changes to your Cacti
+To get the most of CactiView, you should make a couple of simple changes to your Cacti/Ganglia
 installation. These are optional, but will improve the output of CactiView. More details later.
 
 The actual configuration of CactiView is very simple. You do not even have to run CactiView on
@@ -98,7 +97,28 @@ to add a small amount of code to Cacti itself. This is optional, but recommended
 +
 +
 
+7. Modifying Ganglia
 
-7. Help me!
+To allow for custom sizes posted into the URL of the graph.php graph creation script
+in Ganglia, you need to add the following: (put the lines anywhere as long as Ganglia does
+not overwrite the width variable again! Near the bottom is best.)
+
+diff graph.php.20100330 graph.php
+178a179,186
+> if (isset($_GET['width'])) {
+>    $rrdtool_graph['width'] = $_GET['width'];
+> }
+> 
+> if (isset($_GET['height'])) {
+>    $rrdtool_graph['height'] = $_GET['height'];
+> }
+> 
+206a215,218
+> if (isset($_GET['nolegend']) && $_GET['nolegend'] == 1){
+>     $command .= " --no-legend";
+> }
+> 
+
+8. Help me!
 
 No! Well maybe. Send me an email, and I can probably offer some advice. I apologize if not!
