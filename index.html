@@ -1,0 +1,62 @@
+<html>
+<!--
+#########################################################################
+#
+#       CactiView v2.0 - Brian Flad
+#       http://fladpad.com - bflad417@gmail.com
+#       
+#       Forked and updated from the excellent:
+#       CactiView v0.2 - Laurie Denness
+#       http://laurie.denness.net - laurie@denness.net
+#
+#       Displays a rotation selection of graphs from Cacti/Ganglia
+#
+#       Configuration is available in config.json
+#
+#########################################################################
+-->
+  <head>
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <title>CactiView</title>
+    <link rel="stylesheet" href="cactiview.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="cactiview.js" type="text/javascript"></script>
+    <script language="javascript">
+      $(document).keydown(function(objEvent) {
+        keyboardHandler(objEvent);
+      });
+
+      $(function() {
+        $(".left-graph").css("height",left_graph_div_height);
+        $(".left-graph").css("width",left_graph_div_width);
+        $(".right-graph").css("height",right_graph_div_height);
+        $(".right-graph").css("width",right_graph_div_width);
+
+        $("#current_title").css("font-size",current_title_font_size+"px");
+        $("#next_title").css("font-size",next_title_font_size+"px");
+
+        $("#timestamp").css("font-size",timestamp_font_size+"px");
+        $("#timestamp").css("height",timestamp_div_height);
+        $("#timestamp").css("width",timestamp_div_width);
+
+        $.getJSON("config.json",function(config){
+          timeout = config.timeout;
+          url = config.url;
+          graphs = config.graphs;
+          nextPage();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <span id="titles"><span id="current_title"></span><br /><span id="next_title"></span></span>
+    <div id="content">
+      <div class="left-graph loading" id="left-graph"></div>
+      <div class="right-graph loading" id="right-graph-top"></div>
+      <div class="right-graph loading" id="right-graph-middle"></div>
+      <div class="right-graph loading" id="right-graph-bottom"></div>
+      <div id="timestamp"></div>
+    </div>
+  </body>
+</html>

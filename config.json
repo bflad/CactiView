@@ -1,0 +1,11 @@
+{
+  "timeout": 15000,
+  "url": {
+    "cacti": "http://cactihost/cacti/graph_image.php?",
+    "ganglia": "http://gangliahost/ganglia/graph.php?"
+  },
+  "graphs": [
+    {"source": "cacti", "graph_id": "1", "title": "Cacti Graph"},
+    {"source": "ganglia", "cluster": "Cluster Name", "graph_type": "cpu_report" "title": "Ganglia Graph"}
+  ]
+}

@@ -1,0 +1,34 @@
+* {
+  font-family: arial, georgia, sans-serif;
+  padding: 0px;
+  margin: 0px;
+}
+.left-graph {
+  float: left;
+}
+.right-graph {
+  float: right;
+}
+.loading {
+  background: url(ajax-loader.gif) no-repeat center center;
+}
+#content {
+  clear: both;
+}
+#current_title {
+  font-weight: bold;
+}
+
+#next_title {
+  font-style: italic;
+}
+#timestamp {
+  float: right;
+  font-weight: bold;
+  text-align: center;
+}
+#titles {
+  left: 75px;
+  position: absolute;
+  top: 25px;
+}
