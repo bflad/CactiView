@@ -1,7 +1,7 @@
 
 #########################################################################
 #
-#       CactiView v1.1 - Brian Flad
+#       CactiView v2.0 - Brian Flad
 #       http://fladpad.com - bflad417@gmail.com
 #       
 #       Forked and updated from the excellent:
@@ -14,14 +14,13 @@
 #
 #########################################################################
 
-DISCLAIMER: I am not a PHP developer. I am a sysadmin. This code is probably not 100% glamorous, 
-but it works. If you have any problems, I'm sure they won't be hard to solve; and I cannot be
+DISCLAIMER: This code is probably not 100% glamorous, but it works.
+If you have any problems, I'm sure they won't be hard to solve; and I cannot be
 held responsible if you lose data, time, your girlfriend, your house, or anything else from 
 using this code. 
 
 0. Requirements
 
-- PHP
 - Cacti/Ganglia
 - A decent web browser with Javascript/AJAX support
 
@@ -35,8 +34,8 @@ CactiView gives you a clean and simple view of one data source from Cacti at a t
 name the data sources, and set the automatic rotation duration.
 
 When you first load CactiView, it will automatically determine the size of your browser
-and size everything (hopefully) appropriately. If you need to force a resize, just remove
-the height and width parameters from the URL.
+and size everything (hopefully) appropriately. If you need to force a specific size, just add
+height= and width= parameters in the URL.
 
 You can see how this looks here: http://www.flickr.com/photos/hiddenspark42/4447965060/
 Original v0.1 by Laurie: http://www.flickr.com/photos/lozzd/3210562508/
@@ -50,7 +49,7 @@ To get the most of CactiView, you should make a couple of simple changes to your
 installation. These are optional, but will improve the output of CactiView. More details later.
 
 The actual configuration of CactiView is very simple. You do not even have to run CactiView on
-the same server as Cacti. Each configuration option is detailed in the config file, config.php. 
+the same server as Cacti. Each configuration option is detailed in the config file, config.json. 
 At the very least, you should set a sensible timeout, the web path to Cacti (to display the 
 actual graphs) and of course the graphs. All that is required for this is the internal ID of
 the graph in Cacti, and a name for the graph. 
