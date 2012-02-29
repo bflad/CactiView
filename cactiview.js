@@ -124,7 +124,6 @@ function graphUrl(graph_element,current_index) {
     return url['cacti']+
       'action=view'+
       '&local_graph_id='+graphs[current_index]['graph_id']+
-      '&rra_id=0'+
       '&graph_height='+graph_height+
       '&graph_width='+graph_width+
       '&graph_nolegend=1'+
