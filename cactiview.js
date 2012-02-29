@@ -190,7 +190,7 @@ function loadGraph(graph_element,current_index) {
     $(this).fadeIn();
   }).error(function () {
   // notify the user that the image could not be loaded
-  alert("Error loading image!");
+  $(graph_element).addClass('loading');
   }).attr('src', graphUrl(graph_element,current_index));
 }
 
